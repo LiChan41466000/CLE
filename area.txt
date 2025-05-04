@@ -1,0 +1,31 @@
+ 
+****************************************
+Report : area
+Design : CLE
+Version: S-2021.06-SP2
+Date   : Sun Mar  2 14:37:10 2025
+****************************************
+
+Library(s) Used:
+
+    N16ADFP_StdCellff0p88v125c_ccs (File: /ADFP/Executable_Package/Collaterals/IP/stdcell/N16ADFP_StdCell/CCS/N16ADFP_StdCellff0p88v125c_ccs.db)
+
+Number of ports:                           61
+Number of nets:                          1017
+Number of cells:                          971
+Number of combinational cells:            871
+Number of sequential cells:                99
+Number of macros/black boxes:               0
+Number of buf/inv:                        567
+Number of references:                      77
+
+Combinational area:                260.496004
+Buf/Inv area:                      141.471361
+Noncombinational area:              79.833603
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                   340.329607
+Total area:                 undefined
+
+Information: This design contains unmapped logic. (RPT-7)

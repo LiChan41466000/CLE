@@ -1,0 +1,259 @@
+STIL 1.0 {
+    Design 2005;
+}
+Header {
+    Title "Minimal STIL for design `CLE'";
+    Date "Wed Mar  5 22:20:44 2025";
+    Source "DFT Compiler S-2021.06-SP2";
+}
+Signals {
+    "SCAN_IN_1" In;
+    "clk" In;
+    "reset" In;
+    "rom_q[0]" In;
+    "rom_q[1]" In;
+    "rom_q[2]" In;
+    "rom_q[3]" In;
+    "rom_q[4]" In;
+    "rom_q[5]" In;
+    "rom_q[6]" In;
+    "rom_q[7]" In;
+    "sram_q[0]" In;
+    "sram_q[1]" In;
+    "sram_q[2]" In;
+    "sram_q[3]" In;
+    "sram_q[4]" In;
+    "sram_q[5]" In;
+    "sram_q[6]" In;
+    "sram_q[7]" In;
+    "test_se" In;
+    "SCAN_OUT_1" Out;
+    "finish" Out;
+    "rom_a[0]" Out;
+    "rom_a[1]" Out;
+    "rom_a[2]" Out;
+    "rom_a[3]" Out;
+    "rom_a[4]" Out;
+    "rom_a[5]" Out;
+    "rom_a[6]" Out;
+    "sram_a[0]" Out;
+    "sram_a[1]" Out;
+    "sram_a[2]" Out;
+    "sram_a[3]" Out;
+    "sram_a[4]" Out;
+    "sram_a[5]" Out;
+    "sram_a[6]" Out;
+    "sram_a[7]" Out;
+    "sram_a[8]" Out;
+    "sram_a[9]" Out;
+    "sram_d[0]" Out;
+    "sram_d[1]" Out;
+    "sram_d[2]" Out;
+    "sram_d[3]" Out;
+    "sram_d[4]" Out;
+    "sram_d[5]" Out;
+    "sram_d[6]" Out;
+    "sram_d[7]" Out;
+    "sram_wen" Out;
+    "test_si2" In;
+}
+SignalGroups {
+    "_si" = '"SCAN_IN_1" + "test_si2"' {
+        ScanIn;
+    }
+    "_so" = '"SCAN_OUT_1" + "sram_wen"' {
+        ScanOut;
+    }
+    "_clk" = '"clk"';
+    "all_inputs" = '"SCAN_IN_1" + "clk" + "reset" + "rom_q[0]" + "rom_q[1]" + 
+    "rom_q[2]" + "rom_q[3]" + "rom_q[4]" + "rom_q[5]" + "rom_q[6]" + "rom_q[7]" 
+    + "sram_q[0]" + "sram_q[1]" + "sram_q[2]" + "sram_q[3]" + "sram_q[4]" + 
+    "sram_q[5]" + "sram_q[6]" + "sram_q[7]" + "test_se" + "test_si2"';
+    "all_outputs" = '"SCAN_OUT_1" + "finish" + "rom_a[0]" + "rom_a[1]" + 
+    "rom_a[2]" + "rom_a[3]" + "rom_a[4]" + "rom_a[5]" + "rom_a[6]" + "sram_a[0]" 
+    + "sram_a[1]" + "sram_a[2]" + "sram_a[3]" + "sram_a[4]" + "sram_a[5]" + 
+    "sram_a[6]" + "sram_a[7]" + "sram_a[8]" + "sram_a[9]" + "sram_d[0]" + 
+    "sram_d[1]" + "sram_d[2]" + "sram_d[3]" + "sram_d[4]" + "sram_d[5]" + 
+    "sram_d[6]" + "sram_d[7]" + "sram_wen"';
+    "all_ports" = '"all_inputs" + "all_outputs"';
+    "_pi" = '"SCAN_IN_1" + "clk" + "reset" + "rom_q[0]" + "rom_q[1]" + 
+    "rom_q[2]" + "rom_q[3]" + "rom_q[4]" + "rom_q[5]" + "rom_q[6]" + "rom_q[7]" 
+    + "sram_q[0]" + "sram_q[1]" + "sram_q[2]" + "sram_q[3]" + "sram_q[4]" + 
+    "sram_q[5]" + "sram_q[6]" + "sram_q[7]" + "test_se" + "test_si2"';
+    "_po" = '"SCAN_OUT_1" + "finish" + "rom_a[0]" + "rom_a[1]" + "rom_a[2]" + 
+    "rom_a[3]" + "rom_a[4]" + "rom_a[5]" + "rom_a[6]" + "sram_a[0]" + 
+    "sram_a[1]" + "sram_a[2]" + "sram_a[3]" + "sram_a[4]" + "sram_a[5]" + 
+    "sram_a[6]" + "sram_a[7]" + "sram_a[8]" + "sram_a[9]" + "sram_d[0]" + 
+    "sram_d[1]" + "sram_d[2]" + "sram_d[3]" + "sram_d[4]" + "sram_d[5]" + 
+    "sram_d[6]" + "sram_d[7]" + "sram_wen"';
+}
+ScanStructures {
+    ScanChain "1" {
+        ScanLength 72;
+        ScanIn "SCAN_IN_1";
+        ScanOut "SCAN_OUT_1";
+        ScanEnable "test_se";
+        ScanMasterClock "clk";
+    }
+    ScanChain "2" {
+        ScanLength 27;
+        ScanIn "test_si2";
+        ScanOut "sram_wen";
+        ScanEnable "test_se";
+        ScanMasterClock "clk";
+    }
+}
+Timing {
+    WaveformTable "_default_WFT_" {
+        Period '100ns';
+        Waveforms {
+            "all_inputs" {
+                0 {
+                    '0ns' D;
+                }
+            }
+            "all_inputs" {
+                1 {
+                    '0ns' U;
+                }
+            }
+            "all_inputs" {
+                Z {
+                    '0ns' Z;
+                }
+            }
+            "all_inputs" {
+                N {
+                    '0ns' N;
+                }
+            }
+            "all_outputs" {
+                X {
+                    '0ns' X;
+                    '40ns' X;
+                }
+            }
+            "all_outputs" {
+                H {
+                    '0ns' X;
+                    '40ns' H;
+                }
+            }
+            "all_outputs" {
+                T {
+                    '0ns' X;
+                    '40ns' T;
+                }
+            }
+            "all_outputs" {
+                L {
+                    '0ns' X;
+                    '40ns' L;
+                }
+            }
+            "clk" {
+                P {
+                    '0ns' D;
+                    '45ns' U;
+                    '55ns' D;
+                }
+            }
+        }
+    }
+}
+Procedures {
+    "capture" {
+        W "_default_WFT_";
+        C {
+            "all_inputs" = N0 \r19 N;
+            "all_outputs" = \r28 X;
+        }
+        V {
+            "_pi" = \r21 #;
+        }
+        V {
+            "_po" = \r28 #;
+        }
+    }
+    "capture_clk" {
+        W "_default_WFT_";
+        C {
+            "all_inputs" = N0 \r19 N;
+            "all_outputs" = \r28 X;
+        }
+        "forcePI" : V {
+            "_pi" = \r21 #;
+        }
+        "measurePO" : V {
+            "_po" = \r28 #;
+        }
+        C {
+            "SCAN_OUT_1" = X;
+            "finish" = X;
+            "rom_a[0]" = X;
+            "rom_a[1]" = X;
+            "rom_a[2]" = X;
+            "rom_a[3]" = X;
+            "rom_a[4]" = X;
+            "rom_a[5]" = X;
+            "rom_a[6]" = X;
+            "sram_a[0]" = X;
+            "sram_a[1]" = X;
+            "sram_a[2]" = X;
+            "sram_a[3]" = X;
+            "sram_a[4]" = X;
+            "sram_a[5]" = X;
+            "sram_a[6]" = X;
+            "sram_a[7]" = X;
+            "sram_a[8]" = X;
+            "sram_a[9]" = X;
+            "sram_d[0]" = X;
+            "sram_d[1]" = X;
+            "sram_d[2]" = X;
+            "sram_d[3]" = X;
+            "sram_d[4]" = X;
+            "sram_d[5]" = X;
+            "sram_d[6]" = X;
+            "sram_d[7]" = X;
+            "sram_wen" = X;
+        }
+        "pulse" : V {
+            "clk" = P;
+        }
+    }
+    "load_unload" {
+        W "_default_WFT_";
+        C {
+            "all_inputs" = N0 \r19 N;
+            "all_outputs" = \r28 X;
+        }
+        "Internal_scan_pre_shift" : V {
+            "_clk" = 0;
+            "_si" = NN;
+            "_so" = XX;
+            "test_se" = 1;
+        }
+        Shift {
+            V {
+                "_clk" = P;
+                "_si" = ##;
+                "_so" = ##;
+            }
+        }
+    }
+}
+MacroDefs {
+    "test_setup" {
+        W "_default_WFT_";
+        C {
+            "all_inputs" = \r21 N;
+            "all_outputs" = \r28 X;
+        }
+        V {
+            "clk" = 0;
+        }
+        V {
+        }
+    }
+}
+

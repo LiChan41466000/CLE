@@ -1,0 +1,57 @@
+Loading db file '/ADFP/Executable_Package/Collaterals/IP/stdcell/N16ADFP_StdCell/CCS/N16ADFP_StdCellff0p88v125c_ccs.db'
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : CLE
+Version: S-2021.06-SP2
+Date   : Sun Mar  2 14:07:35 2025
+****************************************
+
+
+Library(s) Used:
+
+    N16ADFP_StdCellff0p88v125c_ccs (File: /ADFP/Executable_Package/Collaterals/IP/stdcell/N16ADFP_StdCell/CCS/N16ADFP_StdCellff0p88v125c_ccs.db)
+
+
+Operating Conditions: ff0p88v125c   Library: N16ADFP_StdCellff0p88v125c_ccs
+Wire Load Model Mode: segmented
+
+Design        Wire Load Model            Library
+------------------------------------------------
+CLE                    ZeroWireload      N16ADFP_StdCellff0p88v125c_ccs
+CLE_DW01_inc_0         ZeroWireload      N16ADFP_StdCellff0p88v125c_ccs
+
+
+Global Operating Voltage = 0.88 
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+  Cell Internal Power  =  28.6165 uW   (27%)
+  Net Switching Power  =  77.9937 uW   (73%)
+                         ---------
+Total Dynamic Power    = 106.6102 uW  (100%)
+
+Cell Leakage Power     = 494.6871 uW
+
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network  3.9390e-05            0.0000           32.7803        7.2171e-05  (   0.01%)
+register       2.4161e-02        7.3746e-02        8.8313e+04            0.1862  (  30.97%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational  4.4160e-03        4.2478e-03        4.0634e+05            0.4150  (  69.02%)
+--------------------------------------------------------------------------------------------------
+Total          2.8617e-02 mW     7.7994e-02 mW     4.9469e+05 nW         0.6013 mW

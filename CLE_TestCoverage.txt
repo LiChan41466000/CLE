@@ -1,0 +1,573 @@
+  
+                              Synopsys TestMAX (TM)  
+                                   TetraMAX (R) 
+  
+                  Version P-2019.03 for linux64 - Mar 05, 2019   
+  
+                     Copyright (c) 1996 - 2019 Synopsys, Inc. 
+    This software and the associated documentation are proprietary to Synopsys, 
+  Inc. This software may only be used in accordance with the terms and conditions 
+  of a written license agreement with Synopsys, Inc. All other use, reproduction, 
+             or distribution of this software is strictly prohibited. 
+  
+  
+  Tcl mode is on by default. Use -notcl to run in native mode. 
+  Executing startup file "/usr/cad/synopsys/tmax/cur/admin/setup/tmaxtcl.rc". 
+BUILD-T> read_netlist /home/UIS113/UIS113a01/icc2016cb/CLE_dft.v
+  Begin reading netlist ( /home/UIS113/UIS113a01/icc2016cb/CLE_dft.v )... 
+  End parsing Verilog file /home/UIS113/UIS113a01/icc2016cb/CLE_dft.v with 0 errors. 
+  End reading netlist: #modules=58, top=CLE, #lines=960, CPU_time=0.02 sec, Memory=0MB 
+BUILD-T> read_netlist /home/UIS113/UIS113a01/icc2016cb/N16ADFP_StdCell.v
+  Begin reading netlist ( /home/UIS113/UIS113a01/icc2016cb/N16ADFP_StdCell.v )... 
+  End parsing Verilog file /home/UIS113/UIS113a01/icc2016cb/N16ADFP_StdCell.v with 0 errors. 
+  End reading netlist: #modules=1428, top=tsmc_xbuf, #lines=44374, CPU_time=0.10 sec, Memory=2MB 
+BUILD-T> run_build_model CLE
+  ------------------------------------------------------------------------------ 
+  Begin build model for topcut = CLE ... 
+  ------------------------------------------------------------------------------ 
+  There were 1007 primitives and 0 faultable pins removed during model optimizations 
+ Warning: Rule B9 (undriven module internal net) was violated 3 times.
+
+ Warning: Rule N21 (unsupported UDP entry) was violated 1 times.
+
+  End build model: #primitives=1296, CPU_time=0.03 sec, Memory=1MB 
+  ------------------------------------------------------------------------------ 
+  Begin learning analyses... 
+  End learning analyses, total learning CPU time=0.02 sec. 
+  ------------------------------------------------------------------------------ 
+DRC-T> set_drc /home/UIS113/UIS113a01/icc2016cb/CLE.spf
+DRC-T> run_drc
+  ------------------------------------------------------------------------------ 
+  Begin scan design rules checking... 
+  ------------------------------------------------------------------------------ 
+  Begin reading test protocol file /home/UIS113/UIS113a01/icc2016cb/CLE.spf... 
+  End parsing STIL file /home/UIS113/UIS113a01/icc2016cb/CLE.spf with 0 errors. 
+  Test protocol file reading completed, CPU time=0.00 sec. 
+  ------------------------------------------------------------------------------ 
+  Begin simulating test protocol procedures... 
+  Test protocol simulation completed, CPU time=0.00 sec. 
+  ------------------------------------------------------------------------------ 
+  Begin scan chain operation checking... 
+  Chain 1 successfully traced with 72 scan_cells. 
+  Chain 2 successfully traced with 27 scan_cells. 
+  Scan chain operation checking completed, CPU time=0.01 sec. 
+  ------------------------------------------------------------------------------ 
+  Begin clock rules checking... 
+ Warning: Rule C6 (TE port captured data affected by new capture) was violated 27 times.
+
+  Clock rules checking completed, CPU time=0.00 sec. 
+  Clock grouping results: #pairs=0, #groups=0, #serial_pairs=0, #disturbed_pairs=0, CPU time=0.00 sec. 
+  ------------------------------------------------------------------------------ 
+  Begin nonscan rules checking... 
+  Nonscan cell summary: #DFF=0  #DLAT=0  #RAM_outs=0  tla_usage_type=none 
+  Nonscan rules checking completed, CPU time=0.00 sec. 
+  ------------------------------------------------------------------------------ 
+  Begin DRC dependent learning... 
+  Fast-sequential depth results: control=0(0), observe=0(0), detect=0(0), CPU time=0.00 sec 
+  DRC dependent learning completed, CPU time=0.00 sec. 
+  ------------------------------------------------------------------------------ 
+  DRC Summary Report 
+  ------------------------------------------------------------------------------ 
+ Warning: Rule C6 (TE port captured data affected by new capture) was violated 27 times.
+
+  There were 27 violations that occurred during DRC process. 
+  Design rules checking was successful, total CPU time=0.02 sec. 
+  ------------------------------------------------------------------------------ 
+TEST-T> run_atpg -auto_compression -ndetects 1
+   
+  ATPG performed for stuck fault model using internal pattern source. 
+  ---------------------------------------------------------- 
+  #patterns     #faults     #ATPG faults  test      process 
+  stored     detect/active  red/au/abort  coverage  CPU time 
+  ---------  -------------  ------------  --------  -------- 
+  Begin deterministic ATPG: #uncollapsed_faults=4138, abort_limit=10... 
+  32           3309    828         1/0/0    82.91%      0.12 
+  62            325    502         2/0/1    89.64%      0.14 
+  90            212    287         5/0/2    94.07%      0.17 
+  116            76    207         7/0/2    95.72%      0.18 
+  142            47    155        12/0/4    96.79%      0.19 
+  Local redundancy analysis results: #redundant_faults=2, CPU_time=0.00 sec 
+  162            28    124        13/0/6    97.43%      0.19 
+  Pattern merging terminated due to truncated interval. 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4705 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU          0 
+  Not detected                     ND        124 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            97.43% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         162 
+      #basic_scan patterns                   162 
+  ----------------------------------------------- 
+             CPU Usage Summary Report 
+  ----------------------------------------------- 
+  Total CPU time                            0.20 
+  ----------------------------------------------- 
+TEST-T> run_atpg basic_scan_only -ndetects 1
+  ATPG performed for stuck fault model using internal pattern source. 
+  ---------------------------------------------------------- 
+  #patterns     #faults     #ATPG faults  test      process 
+  stored     detect/active  red/au/abort  coverage  CPU time 
+  ---------  -------------  ------------  --------  -------- 
+  Begin deterministic ATPG: #uncollapsed_faults=124, abort_limit=10... 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4705 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU          0 
+  Not detected                     ND        124 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            97.43% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         162 
+      #basic_scan patterns                   162 
+  ----------------------------------------------- 
+TEST-T> run_atpg full_sequential_only
+  ATPG performed for stuck fault model using internal pattern source. 
+   
+  ------------------------------------------------------------ 
+  Begin Full-Sequential ATPG for 124 uncollapsed faults ... 
+   --- abort limit : 10 seconds, NO BACKTRACK LIMIT 
+  ------------------------------------------------------------ 
+  #patterns  #faults        #ATPG faults  test       process   
+  stored     detect/active  red/au/abort  coverage   CPU time  
+  ---------  -------------  ------------  --------  ---------- 
+  163               8    114         0/2/0     97.60%         1.55 
+  164              37     77         0/2/0     98.36%         1.60 
+  165               3     73         0/3/0     98.43%         3.09 
+  166               4     69         0/3/0     98.51%         3.22 
+  167               4     64         0/4/0     98.59%         3.23 
+  168               2     62         0/4/0     98.63%         3.35 
+  169               2     60         0/4/0     98.67%         3.47 
+  170               2     58         0/4/0     98.72%         3.48 
+GUI: User interrupted. Use [Discard] button to discard pending console output.
+  170               0     58         0/4/1     98.72%        22.88 
+ Error: User interrupt issued, Sequential Test Generation process is terminated. (M10)
+
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4767 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU          4 
+  Not detected                     ND         58 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            98.72% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         170 
+      #basic_scan patterns                   162 
+      #full_sequential patterns                8 
+  ----------------------------------------------- 
+TEST-T> set_atpg -full_seq_time { 2 }
+TEST-T> run_atpg full_sequential_only
+  ATPG performed for stuck fault model using internal pattern source. 
+   
+  ------------------------------------------------------------ 
+  Begin Full-Sequential ATPG for 58 uncollapsed faults ... 
+   --- abort limit : 2 seconds, NO BACKTRACK LIMIT 
+  ------------------------------------------------------------ 
+  #patterns  #faults        #ATPG faults  test       process   
+  stored     detect/active  red/au/abort  coverage   CPU time  
+  ---------  -------------  ------------  --------  ---------- 
+  171               1     57         0/0/0     98.74%         0.03 
+  172               1     55         0/1/0     98.76%         0.04 
+  173               1     54         0/1/1     98.78%         4.10 
+  174               2     52         0/1/1     98.82%         5.65 
+  175               1     49         0/3/1     98.84%         5.66 
+  176               2     41         0/7/1     98.88%        11.32 
+  177               1     40         0/7/1     98.90%        11.32 
+  178               2     37         0/8/1     98.94%        13.09 
+  179               1     36         0/8/2     98.96%        17.13 
+  180               3     33         0/8/2     99.03%        18.56 
+  181               1     32         0/8/2     99.05%        18.67 
+  182               2     30         0/8/2     99.09%        20.28 
+  183               2     28         0/8/2     99.13%        20.39 
+  184               2     13        0/10/2     99.17%        22.02 
+  185               1     12        0/10/2     99.19%        24.03 
+  186               1      6        0/15/2     99.21%        26.05 
+  187               1      5        0/15/2     99.23%        28.07 
+  187               0      2        0/16/2     99.23%        30.09 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU         35 
+  Not detected                     ND          2 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> set_atpg -full_seq_time { 3 }
+TEST-T> run_atpg full_sequential_only
+  ATPG performed for stuck fault model using internal pattern source. 
+   
+  ------------------------------------------------------------ 
+  Begin Full-Sequential ATPG for 2 uncollapsed faults ... 
+   --- abort limit : 3 seconds, NO BACKTRACK LIMIT 
+  ------------------------------------------------------------ 
+  #patterns  #faults        #ATPG faults  test       process   
+  stored     detect/active  red/au/abort  coverage   CPU time  
+  ---------  -------------  ------------  --------  ---------- 
+  187               0      2         0/0/2     99.23%        12.05 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU         35 
+  Not detected                     ND          2 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> set_atpg -full_seq_time { 10 }
+TEST-T> run_atpg full_sequential_only
+  ATPG performed for stuck fault model using internal pattern source. 
+   
+  ------------------------------------------------------------ 
+  Begin Full-Sequential ATPG for 2 uncollapsed faults ... 
+   --- abort limit : 10 seconds, NO BACKTRACK LIMIT 
+  ------------------------------------------------------------ 
+  #patterns  #faults        #ATPG faults  test       process   
+  stored     detect/active  red/au/abort  coverage   CPU time  
+  ---------  -------------  ------------  --------  ---------- 
+  187               0      2         0/0/2     99.23%        40.06 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU         35 
+  Not detected                     ND          2 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> run_atpg basic_scan_only -ndetects 1
+  ATPG performed for stuck fault model using internal pattern source. 
+  ---------------------------------------------------------- 
+  #patterns     #faults     #ATPG faults  test      process 
+  stored     detect/active  red/au/abort  coverage  CPU time 
+  ---------  -------------  ------------  --------  -------- 
+  Begin deterministic ATPG: #uncollapsed_faults=2, abort_limit=10... 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU          0 
+  Not detected                     ND         37 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> run_atpg fast_sequential_only
+  ATPG performed for stuck fault model using internal pattern source. 
+  ---------------------------------------------------------- 
+  #patterns     #faults     #ATPG faults  test      process 
+  stored     detect/active  red/au/abort  coverage  CPU time 
+  ---------  -------------  ------------  --------  -------- 
+  Begin fast-seq ATPG: #uncollapsed_faults=37, abort_limit=10, depth=4... 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU          0 
+  Not detected                     ND         37 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> run_atpg -auto_compression -ndetects 1
+   
+  ATPG performed for stuck fault model using internal pattern source. 
+  ---------------------------------------------------------- 
+  #patterns     #faults     #ATPG faults  test      process 
+  stored     detect/active  red/au/abort  coverage  CPU time 
+  ---------  -------------  ------------  --------  -------- 
+  Begin deterministic ATPG: #uncollapsed_faults=37, abort_limit=10... 
+  Begin fast-seq ATPG: #uncollapsed_faults=37, abort_limit=10, depth=4... 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU          0 
+  Not detected                     ND         37 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+             CPU Usage Summary Report 
+  ----------------------------------------------- 
+  Total CPU time                            0.02 
+  ----------------------------------------------- 
+TEST-T> run_atpg -ndetects 1
+  ATPG performed for stuck fault model using internal pattern source. 
+  ---------------------------------------------------------- 
+  #patterns     #faults     #ATPG faults  test      process 
+  stored     detect/active  red/au/abort  coverage  CPU time 
+  ---------  -------------  ------------  --------  -------- 
+  Begin deterministic ATPG: #uncollapsed_faults=37, abort_limit=10... 
+  Begin fast-seq ATPG: #uncollapsed_faults=37, abort_limit=10, depth=4... 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU          0 
+  Not detected                     ND         37 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> run_atpg -ndetects 1
+  ATPG performed for stuck fault model using internal pattern source. 
+  ---------------------------------------------------------- 
+  #patterns     #faults     #ATPG faults  test      process 
+  stored     detect/active  red/au/abort  coverage  CPU time 
+  ---------  -------------  ------------  --------  -------- 
+  Begin deterministic ATPG: #uncollapsed_faults=37, abort_limit=10... 
+  Begin fast-seq ATPG: #uncollapsed_faults=37, abort_limit=10, depth=4... 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU          0 
+  Not detected                     ND         37 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> set_atpg -full_seq_merge { high }
+ Error: Invalid argument " high ". (M1)
+
+TEST-T> run_atpg full_sequential_only
+  ATPG performed for stuck fault model using internal pattern source. 
+   
+  ------------------------------------------------------------ 
+  Begin Full-Sequential ATPG for 37 uncollapsed faults ... 
+   --- abort limit : 10 seconds, NO BACKTRACK LIMIT 
+  ------------------------------------------------------------ 
+  #patterns  #faults        #ATPG faults  test       process   
+  stored     detect/active  red/au/abort  coverage   CPU time  
+  ---------  -------------  ------------  --------  ---------- 
+TEST-T> run_atpg -auto_compression -ndetects 1
+TEST-T> run_atpg full_sequential_only
+TEST-T> run_atpg -ndetects 1
+TEST-T> 
+  187               0      2        0/20/2     99.23%        80.24  ( 1:20.24 ) 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU         35 
+  Not detected                     ND          2 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> run_atpg full_sequential_only
+  ATPG performed for stuck fault model using internal pattern source. 
+   
+  ------------------------------------------------------------ 
+  Begin Full-Sequential ATPG for 2 uncollapsed faults ... 
+   --- abort limit : 10 seconds, NO BACKTRACK LIMIT 
+  ------------------------------------------------------------ 
+  #patterns  #faults        #ATPG faults  test       process   
+  stored     detect/active  red/au/abort  coverage   CPU time  
+  ---------  -------------  ------------  --------  ---------- 
+  187               0      2         0/0/2     99.23%        40.05 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU         35 
+  Not detected                     ND          2 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+TEST-T> report_summaries faults patterns CLE_Testcoverage.txt
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU         35 
+  Not detected                     ND          2 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+ Error: Invalid argument "CLE_Testcoverage.txt". (M1)
+
+TEST-T> report_summaries faults patterns
+TEST-T> run_atpg -auto_compression -ndetects 1
+   
+  ATPG performed for stuck fault model using internal pattern source. 
+  ---------------------------------------------------------- 
+  #patterns     #faults     #ATPG faults  test      process 
+  stored     detect/active  red/au/abort  coverage  CPU time 
+  ---------  -------------  ------------  --------  -------- 
+  Begin deterministic ATPG: #uncollapsed_faults=2, abort_limit=10... 
+  Begin fast-seq ATPG: #uncollapsed_faults=37, abort_limit=10, depth=4... 
+   
+  ------------------------------------------------------------ 
+  Begin Full-Sequential ATPG for 37 uncollapsed faults ... 
+   --- abort limit : 10 seconds, NO BACKTRACK LIMIT 
+  ------------------------------------------------------------ 
+  #patterns  #faults        #ATPG faults  test       process   
+  stored     detect/active  red/au/abort  coverage   CPU time  
+  ---------  -------------  ------------  --------  ---------- 
+  187               0      2        0/20/2     99.23%        80.25  ( 1:20.25 ) 
+   
+      Uncollapsed Stuck Fault Summary Report 
+  ----------------------------------------------- 
+  fault class                     code   #faults 
+  ------------------------------  ----  --------- 
+  Detected                         DT       4792 
+  Possibly detected                PT          0 
+  Undetectable                     UD         17 
+  ATPG untestable                  AU         35 
+  Not detected                     ND          2 
+  ----------------------------------------------- 
+  total faults                              4846 
+  test coverage                            99.23% 
+  ----------------------------------------------- 
+             Pattern Summary Report 
+  ----------------------------------------------- 
+  #internal patterns                         187 
+      #basic_scan patterns                   162 
+      #full_sequential patterns               25 
+  ----------------------------------------------- 
+             CPU Usage Summary Report 
+  ----------------------------------------------- 
+  Total CPU time                           80.26 
+  ----------------------------------------------- 
+TEST-T> 

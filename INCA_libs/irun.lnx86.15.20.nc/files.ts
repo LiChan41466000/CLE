@@ -1,0 +1,6 @@
+1724689397 /home/UIS113/UIS113a01/icc2016cb/testfixture_a.v
+1724689407 /home/UIS113/UIS113a01/icc2016cb/testfixture_b.v
+1724689413 /home/UIS113/UIS113a01/icc2016cb/testfixture_c.v
+1724687061 /home/UIS113/UIS113a01/icc2016cb/CLE_v3_syn.v
+1724685486 /home/UIS113/UIS113a01/icc2016cb/tsmc13_neg.v
+1724689369 /home/UIS113/UIS113a01/icc2016cb/CLE_syn.v

@@ -1,0 +1,10 @@
+//
+// File created by:  ncverilog
+// Do not modify this file
+//
++ncmaxdelays
+testfixture_c.v
+CLE_syn.v
+tsmc13_neg.v
++define+SDF
++access+rw
